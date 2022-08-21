@@ -15,10 +15,9 @@ def sendData():
             return rc
         except:
             return jsonify({"response":"error"})
- 
-            
-    # return json.dumps(rc)
-    
+
+# eg: http://127.0.0.1:5000/course-data/
+# {"course_id": 15,"course_title": "The Information Technology"}
 @app.route('/course-data/', methods = ['POST'])
 def courseData():
     print("I am course data")
