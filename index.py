@@ -10,8 +10,13 @@ def sendData():
     # eg: hit http://127.0.0.1:5000/?course_title=Computer 
     if request.method == 'GET':
         course_title = request.args.get('course_title')
-        rc = recommend_course(course_title, 10)
-        return rc
+        try:
+            rc = recommend_course(course_title, 10)
+            return rc
+        except:
+            return jsonify({"response":"error"})
+ 
+            
     # return json.dumps(rc)
     
 @app.route('/course-data/', methods = ['POST'])
@@ -23,8 +28,11 @@ def courseData():
         course_title = data['course_title']
         # print(request.json)
         csvWiter(course_id, course_title)
-        recommend_course(course_title, 10)
-        return jsonify({"response":"Ok"})
+        try:
+            recommend_course(course_title, 10)
+            return jsonify({"response":"Ok"})  
+        except:
+            return jsonify({"response":"error"})
     
 if __name__ == '__main__':
     app.run(debug=True)
