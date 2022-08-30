@@ -3689,8 +3689,10 @@ course_id,course_title,url,is_paid,price,num_subscribers,num_reviews,num_lecture
 905096,CSS Animations: Create Amazing Effects on Your Website,https://www.udemy.com/css-animations-create-amazing-effects-on-your-website/,True,50,300,31,38,All Levels,3 hours,2016-08-11T19:06:15Z,Web Development
 297602,Using MODX CMS to Build Websites: A Beginner's Guide,https://www.udemy.com/using-modx-cms-to-build-websites-a-beginners-guide/,True,45,901,36,20,Beginner Level,2 hours,2014-09-28T19:51:11Z,Web Development
 134132,Learn jQuery from Scratch
-123456,Computer5,Foundation Of Information Technology
+123456,Computer
+654321,Computer part 2
 10,Information Technology
 5,Foundation of Information Technology
+15,The Information Technology part 1
+23, hello
 
-15,The Information Technology

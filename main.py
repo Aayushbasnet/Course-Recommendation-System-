@@ -1,4 +1,5 @@
 # Load Exploratory Data Analysis(EDA) Packages
+from operator import index
 import pandas as pd
 # removes unnecessary characters (filtering)
 import neattext.functions as nfx       
@@ -85,7 +86,7 @@ def recommend_course(title, number_of_recv):
     # Scores
     # Sort Scores
     sorted_scores = sorted(scores, key=lambda x:x[1], reverse=True)
-    sorted_scores = sorted_scores[1:]
+    # sorted_scores = sorted_scores[1:]
     # sorted_scores = sorted(scores, key=lambda x:x[1], reverse=True)
     # Recommend
     selected_course_indices = [i[0] for i in sorted_scores]
@@ -96,13 +97,23 @@ def recommend_course(title, number_of_recv):
     # print(recv_df)
     recv_df['similarity_scores'] = selected_course_scores
     recv_df['course_id'] = df['course_id']
-    # # changing index to course_id
-    # recv_df = recv_df.set_index('course_id')
-    # print(recv_df.head(number_of_recv))
+    # Slecting top 10 course whose scores are greater than 0
+    count = 0
+    remove_course_index = 0
+    for i in recv_df['course_title'].head(number_of_recv):
+        if i == title :
+            # print("found", i)
+            remove_course_index = recv_df['course_title'].index.values[count]
+        count += 1
+
+    # # changing index to course_id if necessary
+    # recv_df = recv_df.set_index('course_id') 
+       
     # converting the result to json format for api
-    sendJson = recv_df.head(number_of_recv).to_json(orient='index')
+    sendJson = recv_df.drop(remove_course_index).head(number_of_recv).to_json(orient='index')
+    print("remove_course_index:", remove_course_index)
     # print(sendJson)
     return sendJson
 
-# result = recommend_course('Trading Options Basics', 10)
+# result = recommend_course('Information Technology', 10)
 # print(result)

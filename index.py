@@ -2,16 +2,20 @@ from pickle import GET
 from flask import Flask, jsonify,request
 from csvWriter import csvWiter
 from main import recommend_course
+from flask_cors import CORS, cross_origin
 # Import Module
 # import json
 app = Flask(__name__)
 @app.route('/', methods = ['GET'])
+@cross_origin(origin='*')
 def sendData():
     # eg: hit http://127.0.0.1:5000/?course_title=Computer 
     if request.method == 'GET':
         course_title = request.args.get('course_title')
         try:
             rc = recommend_course(course_title, 10)
+            # rc.headers["Access-Control-Allow-Origin"] = "*"
+            # print("Recommended course : ", rc)
             return rc
         except:
             return jsonify({"response":"error"})
